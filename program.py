@@ -1,5 +1,13 @@
+# Program    : Real Estate App
+# Author     : David Velez
+# Date       : 07/17/18
+# Description: Find the most expensive and least expensive homes from a CSC
+#              as well as the average costs
+
+# Imports
 import csv
 import os
+from data_types import Purchase
 
 try:
     import statistics
@@ -7,9 +15,7 @@ except:
     # error code instead
     import statistics_standin_for_py2 as statistics
 
-from data_types import Purchase
-
-
+# Main Method
 def main():
     print_header()
     filename = get_data_file()
@@ -17,6 +23,7 @@ def main():
     query_data(data)
 
 
+# Print the Header
 def print_header():
     print("-------------------------------")
     print("  REAL ESTATE DATA MINING APP")
@@ -24,12 +31,14 @@ def print_header():
     print()
 
 
+# Get the Data File
 def get_data_file():
     base_folder = os.path.dirname(__file__)
     return os.path.join(base_folder, "data",
                         "SacramentoRealEstateTransactions2008.csv")
 
 
+# Load the File
 def load_file(filename):
     with open(filename, "r") as fin:
         reader = csv.DictReader(fin)
@@ -64,6 +73,7 @@ def load_file(filename):
 # def get_price(p):
 # return p.price
 
+# Query the Data
 def query_data(data):  # list[Purchase]):
 
     # if data was sorted by price:
@@ -119,10 +129,12 @@ def query_data(data):  # list[Purchase]):
           .format(ave_price, round(ave_baths, 1), round(ave_sqft, 1)))
 
 
+# Print items
 def announce(item, msg):
     print("Print item {} for {}".format(item, msg))
     return item
 
 
+# Main
 if __name__ == '__main__':
     main()
